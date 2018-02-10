@@ -7,7 +7,7 @@ The following services are provided:
 
 ### local repo store
 
-[ ] - choose between [pulp] and reposync to keep the following tasting fresh:
+[ ] - choose between [pulp](https://pulpproject.org/) and reposync to keep the following tasting fresh:
 
 * base
 * update
