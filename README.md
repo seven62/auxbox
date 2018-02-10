@@ -7,8 +7,6 @@ The following services are provided:
 
 ### local repo store
 
-[ ] - choose between [pulp](https://pulpproject.org/) and reposync to keep the following tasting fresh:
-
 * base
 * update
 * extras
@@ -21,9 +19,9 @@ The following services are provided:
 * reverse proxy - [lighttpd](https://www.lighttpd.net/)
 * NFS share
 
-#### content
 
 ##### ISO
+
 * Centos7
 * RHEL 7
 * ESXi 6.5 u1 +
@@ -32,17 +30,16 @@ The following services are provided:
 
 ##### misc
 
+[ ] - brainstorm more served content
 
 
-
-
-## PXE 
+## PXE
 
 [ ] - need options
 
 ## DHCP / DNS
 
-[ ] - dnsmasq
+* [dnsmasq]
 
 
 ## Git Server
@@ -51,13 +48,68 @@ The following services are provided:
 
 
 
-## Dependencies
+## Misc
 
-* nfs utils
-* git
 * ansible
 * vim
 * tmux
 * tree
 * brad's dotfiles
 
+
+
+
+## Install Process - v1
+
+```
+### install lighttpd webserver ###
+sudo yum install -y lighttpd.x86_64
+
+### INSTALL NFS ###
+sudo yum install -y nfs-utils.x86_64
+
+### INSTALL reposync ###
+sudo yum install -y yum-utils-1.1.31-42
+
+### install epel repo ###
+sudo yum install epel-release
+
+### install rock repo ###
+https://packagecloud.io/rocknsm/2/el/7/$basearch
+
+### INSTALL elastic repo ###
+
+sudo vim /etc/yum.repos.d/elastic.repo
+
+  [elasticsearch-6.x]
+  name=Elasticsearch repository for 6.x packages
+  baseurl=https://artifacts.elastic.co/packages/6.x/yum
+  gpgcheck=1
+  gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  enabled=1
+  autorefresh=1
+  type=rpm-md
+
+
+### INSTALL DHCP / DNS ###
+sudo yum install -y dnsmasq.x86_64 # : A lightweight DHCP/caching DNS server
+sudo yum install -y dnsmasq-utils.x86_64 # : Utilities for manipulating DHCP server leases
+
+
+### INSTALL GITEA ###
+# Install dependencies
+sudo yum install -y git
+sudo yum install -y mariadb-server
+sudo systemctl start mariadb.service
+
+###### INSTALL MISC ######
+
+# install misc
+sudo yum install -y \
+vim \
+git \
+tmux \
+ansible \
+htop \
+
+```
