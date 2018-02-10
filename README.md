@@ -53,3 +53,11 @@ The following services are provided:
 
 ## Dependencies
 
+* nfs utils
+* git
+* ansible
+* vim
+* tmux
+* tree
+* brad's dotfiles
+
