@@ -139,12 +139,11 @@ sudo yum install -y yum-utils-1.1.31-42
 ########## misc tools ############
 ##################################
 
-sudo yum install -y \
-vim \
-git \
-tmux \
-ansible \
-htop \
+sudo yum install -y vim &
+git &
+tmux &
+ansible &
+htop &
 
 ################################
 ########## Firewall ############
