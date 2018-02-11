@@ -5,12 +5,16 @@ aux(ilary) box that provides multiple utility services for offline deployment
 
 [ ] - add links to tools / products in README  
 [ ] - figure out how to `.sh` adding repos  
-[ ] - research PXE tool options  
+[ ] - https://www.tecmint.com/install-pxe-network-boot-server-in-centos-7/
 [ ] - add configuration steps for each component  
 
 ## Services
 
 The following services are provided:
+
+### configure NTP
+
+This is a requirement for dnsmasq
 
 ### local repo store
 
@@ -69,6 +73,27 @@ The following services are provided:
 ## Install Process - v1
 
 ```
+### install NTP daemon ###
+yum install ntp
+# add server to ntp.conf
+server 2.us.pool.ntp.org
+# allow clients
+restrict 192.168.1.0 netmask 255.255.255.0 nomodify notrap
+# log file:  /var/log/ntp.log
+# firewall-cmd --add-service=ntp --permanent
+# firewall-cmd --reload
+# systemctl start ntpd
+# systemctl enable ntpd
+# systemctl status ntpd
+# ntpq -p
+# date -R
+# ntpdate -q  0.ro.pool.ntp.org  1.ro.pool.ntp.org
+
+### install dnsmasq ###
+yum install dnsmasq
+---> https://www.tecmint.com/install-pxe-network-boot-server-in-centos-7/
+
+
 ### install lighttpd webserver ###
 sudo yum install -y lighttpd.x86_64
 
