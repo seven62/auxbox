@@ -128,11 +128,6 @@ sudo yum install -y dnsmasq.x86_64 # : A lightweight DHCP/caching DNS server
 sudo yum install -y dnsmasq-utils.x86_64 # : Utilities for manipulating DHCP server leases
 
 
-### INSTALL GITEA ###
-# Install dependencies
-sudo yum install -y git
-sudo yum install -y mariadb-server
-sudo systemctl start mariadb.service
 
 ###### INSTALL MISC ######
 
