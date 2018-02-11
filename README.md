@@ -1,6 +1,13 @@
 # AUXbox
 aux(ilary) box that provides multiple utility services for offline deployment
 
+### toDO
+
+[ ] - add links to tools / products in README
+[ ] - figure out how to `.sh` adding repos
+[ ] - research PXE tool options
+[ ] - add configuration steps for each component
+
 ## Services
 
 The following services are provided:
