@@ -58,20 +58,100 @@ EOF'
 sudo systemctl enable chronyd.service
 sudo systemctl start chronyd.service
 
+##########################################
+######## Configure NTP version 2 #########
+##########################################
+
+### install NTP daemon ###
+yum install ntp
+# add server to ntp.conf
+server 2.us.pool.ntp.org
+# allow clients
+restrict 192.168.1.0 netmask 255.255.255.0 nomodify notrap
+# log file:  /var/log/ntp.log
+# firewall-cmd --add-service=ntp --permanent
+# firewall-cmd --reload
+# systemctl start ntpd
+# systemctl enable ntpd
+# systemctl status ntpd
+# ntpq -p
+# date -R
+# ntpdate -q  0.ro.pool.ntp.org  1.ro.pool.ntp.org
+
+
+################################
+########## dnsmasq  ############
+################################
+
+### dns / dhcp / PXE ###
+sudo yum install -y dnsmasq.x86_64 # : A lightweight DHCP/caching DNS server
+sudo yum install -y dnsmasq-utils.x86_64 # : Utilities for manipulating DHCP server leases
+
+@todo ---> https://www.tecmint.com/install-pxe-network-boot-server-in-centos-7/
+
+
+
+
+##################################
+########## Web Server ############
+##################################
+
+### install lighttpd webserver ###
+sudo yum install -y lighttpd.x86_64
+
+
+### INSTALL NFS ###
+sudo yum install -y nfs-utils.x86_64
+
+
+
+
+###################################
+########## local repos ############
+###################################
+
+### install epel repo ###
+sudo yum install epel-release
+
+### install rock repo ###
+https://packagecloud.io/rocknsm/2/el/7/$basearch
+
+### INSTALL elastic repo ###
+
+sudo vim /etc/yum.repos.d/elastic.repo
+
+  [elasticsearch-6.x]
+  name=Elasticsearch repository for 6.x packages
+  baseurl=https://artifacts.elastic.co/packages/6.x/yum
+  gpgcheck=1
+  gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  enabled=1
+  autorefresh=1
+  type=rpm-md
+
+### INSTALL reposync ###
+sudo yum install -y yum-utils-1.1.31-42
+
+# configure reposync for above repos
+# @todo
+
+##################################
+########## misc tools ############
+##################################
+
+sudo yum install -y \
+vim \
+git \
+tmux \
+ansible \
+htop \
 
 ################################
 ########## Firewall ############
 ################################
 
-# Port 80 - Nginx
-# Port 3000 - RocketChat
-# Port 4000 - Gitea
-# Port 5000 - Etherpad
-# Port 5601 - Kibana
-# Port 7000 - Mumble
-# Port 9000 - TheHive
-# Port 9001 - Cortex (TheHive Analyzer Plugins)
-sudo firewall-cmd --add-port=80/tcp --add-port=3000/tcp --add-port=4000/tcp --add-port=5000/tcp --add-port=5601/tcp --add-port=9000/tcp --add-port=9001/tcp --add-port=7000/tcp --add-port=7000/udp --permanent
+# Port xx - tbd
+sudo firewall-cmd --add-port=tbd/tcp --add-port=tbd/tcp --add-port=tbd/tcp --permanent
 sudo firewall-cmd --reload
 
 ################################
